@@ -153,10 +153,6 @@ class Color {
         $this->r = (($r + $m) * 255);
         $this->g = (($g + $m) * 255);
         $this->b = (($b + $m) * 255);
-if ($this->r > 255 || $this->g > 255 || $this->b > 255) {
-    var_dump(array($r, $g, $b, $m, $chroma, $x));
-    var_dump(array($this->r, $this->g, $this->b));
-}
 
         return $this;
     }
@@ -196,57 +192,60 @@ if ($this->r > 255 || $this->g > 255 || $this->b > 255) {
      */
     function fromHSV($h, $s, $v)
     {
-        if ($s == 0)
-        {
+        $h = (float) $h;
+        $s = (float) $s;
+
+        if ($s == 0) {
             $this->r = $this->g = $this->b = $v * 255;
             return $this;
-        } else {
-           $vh = $h * 6;
-           $hi = intval($vh);
-           //$g = $hi > 2 ? $vh - 2 : $vh;
-           //$g = $hi > 4 ? $g  - 2 : $g;
-
-           $v1 = $v * (1 - $s);
-           $v2 = $v * (1 - $s * ($vh - $hi));
-           $v3 = $v * (1 - $s * (1 - ($vh - $hi)));
-
-           switch ($hi) {
-               case 0: case 6:
-               $r = $v;
-               $g = $v3;
-               $b = $v1;
-               break;
-           case 1:
-               $r = $v2;
-               $g = $v;
-               $b = $v3;
-               break;
-           case 2:
-               $r = $v1;
-               $g = $v;
-               $b = $v3;
-               break;
-           case 3:
-               $r = $v1;
-               $g = $v2;
-               $b = $v;
-               break;
-           case 4:
-               $r = $v3;
-               $g = $v1;
-               $b = $v;
-               break;
-           case 5:
-               $r = $v;
-               $g = $v1;
-               $b = $v2;
-               break;
-           }
-
-           $this->r = $r * 255;
-           $this->g = $g * 255;
-           $this->b = $b * 255;
         }
+
+        $chroma = $v * $s;
+
+        // Divide $h by 60 degrees i.e by (60 / 360)
+        $h_ = $h * 6;
+        // intermediate
+        $k = intval($h_);
+
+        $g = $k > 2 ? $h_ - 2 : $h_;
+        $g = $k > 4 ? $g  - 2 : $g;
+
+        $x = $chroma * abs(1 - abs($g - 1));
+
+        $r = $g = $b = 0.0;
+
+        switch ($k) {
+        case 0: case 6:
+            $r = $chroma;
+            $g = $x;
+            break;
+        case 1:
+            $r = $x;
+            $g = $chroma;
+            break;
+        case 2:
+            $g = $chroma;
+            $b = $x;
+            break;
+        case 3:
+            $g = $x;
+            $b = $chroma;
+            break;
+        case 4:
+            $r = $x;
+            $b = $chroma;
+            break;
+        case 5:
+            $r = $chroma;
+            $b = $x;
+            break;
+        }
+
+        $m = $v - $chroma;
+
+        $this->r = (($r + $m) * 255);
+        $this->g = (($g + $m) * 255);
+        $this->b = (($b + $m) * 255);
 
         return $this;
     }

@@ -76,7 +76,7 @@ for ($i=0; $i <= 100; $i++) {
 ?>
 </div>
 <p>
-    <code><strong>Varying Saturation</strong> // Hue = 1/3, Value = 1</code>
+    <code><strong>Varying Saturation</strong> // Hue = 1/3, Value = 1.0</code>
 </p>
 <?php
 
