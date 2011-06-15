@@ -199,16 +199,19 @@ if ($this->r > 255 || $this->g > 255 || $this->b > 255) {
         if ($s == 0)
         {
             $this->r = $this->g = $this->b = $v * 255;
+            return $this;
         } else {
-           $vh = ($h == 1) ? 0 : $h * 6;
+           $vh = $h * 6;
            $hi = intval($vh);
+           //$g = $hi > 2 ? $vh - 2 : $vh;
+           //$g = $hi > 4 ? $g  - 2 : $g;
 
            $v1 = $v * (1 - $s);
            $v2 = $v * (1 - $s * ($vh - $hi));
            $v3 = $v * (1 - $s * (1 - ($vh - $hi)));
 
            switch ($hi) {
-           case 0:
+               case 0: case 6:
                $r = $v;
                $g = $v3;
                $b = $v1;
@@ -463,7 +466,7 @@ if ($this->r > 255 || $this->g > 255 || $this->b > 255) {
             if ($r == $max) {
                 $h = (0.0 / 3) + $db - $dg;
             } elseif ($g == $max) {
-                $h = (1.0 / 3) + $dr - $rb;
+                $h = (1.0 / 3) + $dr - $db;
             } elseif ($b == $max) {
                 $h = (2.0 / 3) + $dg - $dr;
             }
