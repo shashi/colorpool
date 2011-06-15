@@ -4,12 +4,12 @@
     <title>HSL Tests</title>
     <style>
     body {
-        width: 999px;
+        width: 910px;
         margin: 0 auto;
     }
 
     b {
-        width: 1px;
+        width: 9px;
         height: 160px;
         display: inline;
         float: left;
@@ -33,9 +33,9 @@ require_once '../Color.php';
 $s = 1;
 $l = 0.5;
 
-for ($i=0; $i <= 1000; $i++) {
+for ($i=0; $i <= 100; $i++) {
     $c = new Color();
-    $h = $i / 1000.0;
+    $h = $i / 100.0;
     $hex = $c->fromHSL($h, $s, $l)->toHexString();
     ?><b style="background:<?php echo $hex ?>"></b>
 <?php
@@ -43,16 +43,16 @@ for ($i=0; $i <= 1000; $i++) {
 ?>
 
 <p>
-    <code><strong>Varying Saturation</strong> // Hue=0.33, Lightness = 0.5</code>
+    <code><strong>Varying Saturation</strong> // Hue = 1/3, Lightness = 0.5</code>
 </p>
 <?php
 
 $h = 0;
 $l = 0.5;
 
-for ($i=0; $i < 1000; $i++) {
+for ($i=0; $i <= 100; $i++) {
     $c = new Color();
-    $s = $i / 1000.0;
+    $s = $i / 100.0;
     $hex = $c->fromHSL($h, $s, $l)->toHexString();
     ?><b style="background:<?php echo $hex ?>"></b>
 <?php
@@ -60,16 +60,16 @@ for ($i=0; $i < 1000; $i++) {
 ?>
 
 <p>
-    <code><strong>Varying Lightness</strong> // Hue = 0.33, Saturation = 1.0</code>
+    <code><strong>Varying Lightness</strong> // Hue = 2/3, Saturation = 1.0</code>
 </p>
 <?php
 
 $s = 1;
 $h = 2/3.0;
 
-for ($i=0; $i < 1000; $i++) {
+for ($i=0; $i <= 100; $i++) {
     $c = new Color();
-    $l = $i / 1000.0;
+    $l = $i / 100.0;
     $hex = $c->fromHSL($h, $s, $l)->toHexString();
     ?><b style="background:<?php echo $hex ?>"></b>
     <?php
