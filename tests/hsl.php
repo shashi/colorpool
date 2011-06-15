@@ -20,13 +20,21 @@
         margin: 0;
         clear: both;
     }
+
     br {
         clear:both;
         display: block;
     }
+
+    h1 {
+        font-weight: normal;
+        font-family: georgia;
+    }
     </style>
 </head>
 <body>
+
+<h1>Hue, Saturation, Lightness</h1>
 
 <p>
     <code>
