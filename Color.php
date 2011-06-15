@@ -28,7 +28,7 @@ class Color {
             $this->fromHexString($color);
         }
 
-        if (substr(0, 3, $color) == 'rgb') {
+        if (substr($color, 0, 3) == 'rgb') {
             $this->fromRBGString($color);
         }
     }
@@ -43,7 +43,7 @@ class Color {
     {
         $color = rtrim($color, '#');
         preg_match_all('([0-9a-f][0-9a-f])', $color, $rgb);
-        list($this->r, $this->g, $this->b) = array_map('hexdec', $rgb);
+        list($this->r, $this->g, $this->b) = array_map('hexdec', $rgb[0]);
 
         return $this;
     }
@@ -408,7 +408,7 @@ if ($this->r > 255 || $this->g > 255 || $this->b > 255) {
             if ($r == $max) {
                 $h = (0.0 / 3) + $db - $dg;
             } elseif ($g == $max) {
-                $h = (1.0 / 3) + $dr - $rb;
+                $h = (1.0 / 3) + $dr - $db;
             } elseif ($b == $max) {
                 $h = (2.0 / 3) + $dg - $dr;
             }
