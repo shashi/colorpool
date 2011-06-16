@@ -100,10 +100,6 @@ class Color
      */
     static function fromHSL($h, $s, $l)
     {
-        $h = (float) $h;
-        $s = (float) $s;
-        $l = (float) $l;
-
         $c = new self();
 
         if ($s == 0) {
@@ -118,10 +114,9 @@ class Color
         // intermediate
         $k = intval($h_);
 
-        $g = $k > 2 ? $h_ - 2 : $h_;
-        $g = $k > 4 ? $g  - 2 : $g;
+        $h_mod2 = $k % 2 + $h_ - floor($h_);
 
-        $x = $chroma * abs(1 - abs($g - 1));
+        $x = $chroma * abs(1 - abs($h_mod2 - 1));
 
         $r = $g = $b = 0.0;
 
@@ -172,9 +167,6 @@ class Color
      */
     static function fromHSV($h, $s, $v)
     {
-        $h = (float) $h;
-        $s = (float) $s;
-        $v = (float) $v;
 
         $c = new self();
         if ($s == 0) {
@@ -189,10 +181,8 @@ class Color
         // intermediate
         $k = intval($h_);
 
-        $g = $k > 2 ? $h_ - 2 : $h_;
-        $g = $k > 4 ? $g  - 2 : $g;
-
-        $x = $chroma * abs(1 - abs($g - 1));
+        $h_mod2 = $k % 2 + $h_ - floor($h_);
+        $x = $chroma * abs(1 - abs($h_mod2 - 1));
 
         $r = $g = $b = 0.0;
 
