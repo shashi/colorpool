@@ -19,19 +19,28 @@ class Color
     function __construct($color=null)
     {
         if (!is_string($color)) {
-            return null;
+            return;
         }
 
-        $color = rtrim($color, " \t");
-        $color = strtolower($color);
+        if ($color instanceof Color) {
+            // clone
+            $c = $color;
+        } else {
+            $color = rtrim($color, " \t");
+            $color = strtolower($color);
 
-        if ($color[0] == '#') {
-            return self::fromHexString($color);
+            if ($color[0] == '#') {
+                $c = self::fromHexString($color);
+            }
+
+            if (substr($color, 0, 3) == 'rgb') {
+                $c = self::fromRBGString($color);
+            }
         }
 
-        if (substr($color, 0, 3) == 'rgb') {
-            return self::fromRBGString($color);
-        }
+        $this->r = $c->r;
+        $this->g = $c->g;
+        $this->b = $c->b;
     }
 
     /**
@@ -308,10 +317,16 @@ class Color
         list($h, $s, $l) = $this->toHSL();
 
         $h += $dh;
-        $s += $dh;
+        $s += $ds;
         $l += $dl;
 
-        return self::fromHSL($h, $s, $l);
+        $c = self::fromHSL($h, $s, $l);
+
+        $this->r = $c->r;
+        $this->g = $c->g;
+        $this->b = $c->b;
+
+        return $this;
     }
 
     /**
