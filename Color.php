@@ -472,4 +472,27 @@ class Color
 
         return array($h, $s, $v);
     }
+
+    /**
+     * Get the luma of the color
+     *
+     * @returns float The Luma
+     */
+    function luma()
+    {
+        return (0.30 * $this->r +
+                0.59 * $this->g +
+                0.11 * $this->b) / 255;
+    }
+
+    /**
+     * Is the color dark?
+     *
+     * @returns bool dark marked?
+     */
+    function isDark()
+    {
+        // TODO: Read a paper on this :P
+        return $this->luma() < 0.50;
+    }
 }
