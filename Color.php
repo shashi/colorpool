@@ -112,9 +112,6 @@ class Color
         // theta plus 360 degrees
         $h -= floor($h);
 
-        $s = $s != 1 ? $s - floor($s) : $s;
-        $l = $l != 1 ? $l - floor($l) : $l;
-
         $c = new self();
 
         if ($s == 0) {
@@ -185,9 +182,6 @@ class Color
 
         $h -= floor($h);
 
-        $s = $s != 1 ? $s - floor($s) : $s;
-        $v = $v != 1 ? $v - floor($v) : $v;
-
         $c = new self();
         if ($s == 0) {
             $c->r = $c->g = $c->b = $v * 255;
@@ -254,7 +248,7 @@ class Color
         $hsl = $this->toHSL();
         $l = $hsl[2];
         // so that 100% darker = black
-        $dl = -1 * $l * $fraction;
+        $dl = -$l * $fraction;
 
         return $this->changeHSL(0, 0, $dl);
     }
