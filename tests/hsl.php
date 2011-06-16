@@ -50,10 +50,9 @@ $s = 1;
 $l = 0.5;
 
 for ($i=0; $i <= 100; $i++) {
-    $c = new Color();
     $h = $i / 100.0;
 
-    $hex = $c->fromHSL($h, $s, $l)->toHexString();
+    $hex = Color::fromHSL($h, $s, $l)->toHexString();
     echo "<b style='background:$hex'></b>";
 }
 ?>
@@ -65,15 +64,13 @@ for ($i=0; $i <= 100; $i++) {
     $s = 1;
     $l = 0.5;
 
-    $c = new Color();
     $h = $i / 100.0;
 
-    $hex = $c->fromHSL($h, $s, $l)->toHexString();
+    $hex = Color::fromHSL($h, $s, $l)->toHexString();
     $rgb = new Color($hex);
     list($h, $s, $l) = $rgb->toHSL();
 
-    $c = new Color();
-    $c->fromHSL($h, $s, $l)->toHexString();
+    Color::fromHSL($h, $s, $l)->toHexString();
 
     echo "<b style='background:$hex'></b>";
 }
@@ -88,9 +85,8 @@ $h = 0;
 $l = 0.5;
 
 for ($i=0; $i <= 100; $i++) {
-    $c = new Color();
     $s = $i / 100.0;
-    $hex = $c->fromHSL($h, $s, $l)->toHexString();
+    $hex = Color::fromHSL($h, $s, $l)->toHexString();
     echo "<b style='background:$hex'></b>";
 }
 ?>
@@ -102,15 +98,13 @@ for ($i=0; $i <= 100; $i++) {
     $s = 1;
     $l = 0.5;
 
-    $c = new Color();
     $s = $i / 100.0;
 
-    $hex = $c->fromHSL($h, $s, $l)->toHexString();
-    $rgb = new Color($hex);
+    $hex = Color::fromHSL($h, $s, $l)->toHexString();
+    $rgb = Color::fromHexString($hex);
     list($h, $s, $l) = $rgb->toHSL();
 
-    $c = new Color();
-    $c->fromHSL($h, $s, $l)->toHexString();
+    Color::fromHSL($h, $s, $l)->toHexString();
 
     echo "<b style='background:$hex'></b>";
 }
@@ -124,9 +118,8 @@ $s = 1;
 $h = 2/3.0;
 
 for ($i=0; $i <= 100; $i++) {
-    $c = new Color();
     $l = $i / 100.0;
-    $hex = $c->fromHSL($h, $s, $l)->toHexString();
+    $hex = Color::fromHSL($h, $s, $l)->toHexString();
     echo "<b style='background:$hex'></b>";
 }
 ?>
@@ -138,15 +131,13 @@ for ($i=0; $i <= 100; $i++) {
     $s = 1;
     $h = 2/3.0;
 
-    $c = new Color();
     $l = $i / 100.0;
 
-    $hex = $c->fromHSL($h, $s, $l)->toHexString();
-    $rgb = new Color($hex);
+    $hex = Color::fromHSL($h, $s, $l)->toHexString();
+    $rgb = Color::fromHexString($hex);
     list($h, $s, $l) = $rgb->toHSL();
 
-    $c = new Color();
-    $c->fromHSL($h, $s, $l)->toHexString();
+    Color::fromHSL($h, $s, $l)->toHexString();
 
     echo "<b style='background:$hex'></b>";
 }

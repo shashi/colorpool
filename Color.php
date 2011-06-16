@@ -3,7 +3,8 @@
 /**
  * Color
  */
-class Color {
+class Color
+{
     public $r;
     public $g;
     public $b;
@@ -25,11 +26,11 @@ class Color {
         $color = strtolower($color);
 
         if ($color[0] == '#') {
-            $this->fromHexString($color);
+            return self::fromHexString($color);
         }
 
         if (substr($color, 0, 3) == 'rgb') {
-            $this->fromRBGString($color);
+            return self::fromRBGString($color);
         }
     }
 
@@ -39,32 +40,32 @@ class Color {
      * @param string $color The hex string
      * @returns Color the color object
      */
-    function fromHexString($color)
+    static function fromHexString($color)
     {
         $color = rtrim($color, '#');
         preg_match_all('([0-9a-f][0-9a-f])', $color, $rgb);
-        list($this->r, $this->g, $this->b) = array_map('hexdec', $rgb[0]);
 
-        return $this;
+        $c = new self();
+        list($c->r, $c->g, $c->b) = array_map('hexdec', $rgb[0]);
+
+        return $c;
     }
 
     /**
      * Construct Color object from an rgb string
      *
-     * @example:
-     *   $c = new Color();
-     *   $c->fromRGBString("rgb(42, 42, 42)")
-     *
      * @param string $color The rgb string representing the color
      * @returns Color object with for the rgb string
      */
-    function fromRGBString($color)
+    static function fromRGBString($color)
     {
         $color = rtrim($color, "rgb (\t)");
         $rgb = preg_split('\s+,\s+', $color);
-        list($this->r, $this->g, $this->b) = array_map('intval', $rgb);
 
-        return $this;
+        $c = new self();
+        list($c->r, $c->g, $c->b) = array_map('intval', $rgb);
+
+        return $c;
     }
 
     /**
@@ -80,7 +81,7 @@ class Color {
             $this->decToHex($this->b);
     }
 
-    function decToHex($d)
+    private function decToHex($d)
     {
         $h = dechex(round($d));
         $h = str_pad($h, 2, '0', STR_PAD_LEFT);
@@ -97,14 +98,17 @@ class Color {
      *
      * @retuns Color the color object for the HSL values
      */
-    function fromHSL($h, $s, $l)
+    static function fromHSL($h, $s, $l)
     {
         $h = (float) $h;
         $s = (float) $s;
+        $l = (float) $l;
+
+        $c = new self();
 
         if ($s == 0) {
-            $this->r = $this->g = $this->b = $l * 255;
-            return $this;
+            $c->r = $c->g = $c->b = $l * 255;
+            return $c;
         }
 
         $chroma = floatval(1 - abs(2*$l - 1)) * $s;
@@ -150,35 +154,11 @@ class Color {
 
         $m = $l - 0.5 * $chroma;
 
-        $this->r = (($r + $m) * 255);
-        $this->g = (($g + $m) * 255);
-        $this->b = (($b + $m) * 255);
+        $c->r = (($r + $m) * 255);
+        $c->g = (($g + $m) * 255);
+        $c->b = (($b + $m) * 255);
 
-        return $this;
-    }
-
-    /**
-     * Helper function for converting Hue to RGP
-     *
-     * @returns float
-     */
-    protected function hueToRGB($var1, $var2, $h_)
-    {
-        if ($h_ < 0) {
-            $h_ += 1;
-        } else {
-            $h_ -= 1;
-        }
-
-        if ((6 * $h_) < 1) {
-            return ($var1 + ($var2 - $var1) * 6 * $h_);
-        } elseif ((2 * $h_) < 1) {
-            return ($var2);
-        } elseif ((3 * $h_) < 2){
-            return ($var1 + ($var2 - $var1) * ((2 / 3) - $h_) * 6);
-        } else {
-            return ($var1);
-        }
+        return $c;
     }
 
     /**
@@ -190,14 +170,16 @@ class Color {
      *
      * @returns Color The color object for the HSV values
      */
-    function fromHSV($h, $s, $v)
+    static function fromHSV($h, $s, $v)
     {
         $h = (float) $h;
         $s = (float) $s;
+        $v = (float) $v;
 
+        $c = new self();
         if ($s == 0) {
-            $this->r = $this->g = $this->b = $v * 255;
-            return $this;
+            $c->r = $c->g = $c->b = $v * 255;
+            return $c;
         }
 
         $chroma = $v * $s;
@@ -243,11 +225,11 @@ class Color {
 
         $m = $v - $chroma;
 
-        $this->r = (($r + $m) * 255);
-        $this->g = (($g + $m) * 255);
-        $this->b = (($b + $m) * 255);
+        $c->r = (($r + $m) * 255);
+        $c->g = (($g + $m) * 255);
+        $c->b = (($b + $m) * 255);
 
-        return $this;
+        return $c;
     }
 
     /**
@@ -306,7 +288,7 @@ class Color {
     function contrast($fraction=1.0)
     {
         // 1 = fully complementary.
-        $dh = (1 / 2) * $fraction;
+        $dh = (1.0 / 2) * $fraction;
 
         return $c->changeHSL($dh, 0, 0);
     }
@@ -332,12 +314,12 @@ class Color {
         $s -= floor($s);
         $l -= floor($l);
 
-        $c = new Color();
-        return $c->fromHSL($h, $s, $l);
+        return self::fromHSL($h, $s, $l);
     }
 
     /**
      * Apply callbacks on HSV or HSL value of the color
+     * @fixme: is this pointless?
      *
      * @param callback $h_callback Callback for Hue
      * @param callback $s_callback Callback for Saturation
@@ -363,10 +345,12 @@ class Color {
         $c = new Color();
 
         if ($type == 'hsl') {
-            $c = $this->fromHSL($h, $s, $x);
+            $c = self::fromHSL($h, $s, $x);
         } elseif ($type == 'hsv') {
-            $c = $this->fromHSV($h, $s, $x);
+            $c = self::fromHSV($h, $s, $x);
         }
+
+        return $c;
     }
 
     /**
