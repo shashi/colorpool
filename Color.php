@@ -100,6 +100,12 @@ class Color
      */
     static function fromHSL($h, $s, $l)
     {
+        // theta plus 360 degrees
+        $h -= floor($h);
+
+        $s = $s != 1 ? $s - floor($s) : $s;
+        $l = $l != 1 ? $l - floor($l) : $l;
+
         $c = new self();
 
         if ($s == 0) {
@@ -167,6 +173,11 @@ class Color
      */
     static function fromHSV($h, $s, $v)
     {
+
+        $h -= floor($h);
+
+        $s = $s != 1 ? $s - floor($s) : $s;
+        $v = $v != 1 ? $v - floor($v) : $v;
 
         $c = new self();
         if ($s == 0) {
@@ -299,10 +310,6 @@ class Color
         $h += $dh;
         $s += $dh;
         $l += $dl;
-
-        $h -= floor($h);
-        $s -= floor($s);
-        $l -= floor($l);
 
         return self::fromHSL($h, $s, $l);
     }
