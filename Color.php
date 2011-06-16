@@ -267,7 +267,7 @@ class Color
         // so that 100% lighter = white
         $dl = (1 - $l) * $fraction;
 
-        return $c->changeHSL(0, 0, $dl);
+        return $this->changeHSL(0, 0, $dl);
     }
 
     /**
@@ -294,7 +294,7 @@ class Color
         // 1 = fully complementary.
         $dh = (1.0 / 2) * $fraction;
 
-        return $c->changeHSL($dh, 0, 0);
+        return $this->changeHSL($dh, 0, 0);
     }
 
     /**
