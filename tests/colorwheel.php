@@ -7,7 +7,7 @@
         <title>The Color Wheel</title>
 
         <style>
-          b {font-size: 16px; letter-spacing: -3px;}
+          b {font-size: 16px; letter-spacing: -2px;}
           div { text-align: center; clear:both;height: 8px; }
           body { background: white; }
           h1 { font-family: georgia; font-weight: normal; text-align: center; }
@@ -21,9 +21,6 @@
 
 require_once '../Color.php';
 
-//$wheel = imagecreate(100, 100);
-//imagecolorallocate($wheel, 255,255,255);
-// -50* = 360 - 50
 $radius = 50;
 
 function distance($x, $y)

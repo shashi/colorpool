@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>colorpool &mdash; color manipulation</title>
+  <style>
+    h1 {
+      font-weight: normal;
+      text-align: center;
+      padding-bottom: 30px;
+      border-bottom: 1px #ddd solid;
+    }
+    h1 {
+      font-size: 5em;
+    
+    }
+    h2 {
+      font-size: 2em;
+      color: #aaaaaa;
+      border-top: 1px #888 dotted;
+      text-align: right;
+      margin-bottom: -1.8em;
+      padding-top: 16px;
+      font-weight: normal;
+      font-style: italic;
+    }
+    p {
+      font-size: 1.4em;
+      text-align: justify;
+    }
+    body {
+      width: 900px;
+      font-family: georgia, ubuntu;
+      margin: 0 auto;
+      font: 12pt;
+    }
+    dl {
+      margin: 0 10px;
+    }
+    dt, dd {
+      text-align: center;
+      display: inline;
+      width: 380px;
+      height: 350px;
+      float:left;
+      margin: 0 10px;
+    }
+    dt {
+      padding-top: 120px;
+      margin-bottom: -120px;
+      font-size: 3em;
+      color: #222;
+    }
+    dd {
+    }
+    div.item {
+      clear: both;
+      padding-top: 30px;
+      border-top: #aaa 1px solid;
+    }
+    
+    div.item a {
+      background: none;
+    }
+    div.item a:hover {
+      background: none;
+      color: #363;
+      border-bottom: 1px #595 solid;
+    }
+    a {
+      background: #cef;
+      clear: both;
+      text-decoration: none;
+      color: #111;
+      padding: 0 5px;
+    }
+    a:hover {
+      background: #a25;
+      color: #fff;
+    }
+
+    .footer {
+      text-align: center;
+      color: #333;
+      margin: 40px;
+    }
+    div.item.first {
+      border-top: none;
+    }
+    h1 sup {
+      color: #aaa;
+      font-family: monospace;
+      font-style: italic;
+    }
+    /*
+    h1 {
+      color: white;
+    }
+    
+    h1 .one {
+      color: #B848FF;
+    }
+    h1 .two {
+      color: #e72988;
+    }
+    h1 .three {
+      color: #FFE12A;
+    }
+    
+    h1 .four {
+      color: #1FB5FF;
+    }
+    
+    h1 .fourpointfive {
+      color: #ef2345;
+    }
+    h1 .five {
+      color: #FF2E99;
+    }
+    h1 .six {
+      color: #43aa87;
+    }
+    h1 .seven {
+      color: #FF8A2D;
+    }
+    h1 .eight {
+      color: #5931FF;
+    }
+    */
+  </style>
+</head>
+
+<body>
+<h1><span class="one">c</span><span class="two">o</span><span class="three">l</span><span class="four">o</span><span class="fourpointfive">r</span><span class="five">p</span><span class="six">o</span><span class="seven">o</span><span class="eight">l</span><sup>&alpha;</sup></h1>
+
+<p><a href="https://github.com/shashi/colorpool">colorpool</a> is a color
+manipulation library written in PHP. It lets you easily convert RGB
+color values to more perception-friendly color spaces such as
+<a href="http://en.wikipedia.org/wiki/HSL_and_HSV">HSL and HSV</a> and vice-versa.
+It helps you easily find contrasting, analogous, monochrome colors.</p>
+
+<h2>In the works</h2>
+<p>Lab color spaces, helpers for generating palettes a la <a href="http://kuler.adobe.com">kuler</a>.</p>
+
+<h2>Grab the code</h2>
+<p>
+  Clone the <a href="http://github.com/shashi/colorpool">git repository</a> using
+  <p>
+  <code>git clone https://github.com/shashi/colorpool.git</code>
+  <p>
+  or download the latest code <a href="http://github.com/shashi/colorpool/tree/master/tarball">here</a>.
+  You can also read the <a href="api.html">documentation</a>.
+</p>
+
+<h2>Test Results</h2>
+<p>(against <a href="http://github.com/shashi/colorpool/tree/14ce113">14ce113</a> &mdash; 06/17/2011)</p>
+
+<dl>
+  <div class="item first">
+
+    <dt><a href="colorwheel.html">Colorwheel</a></dt>
+    <dd><img src="images/colorwheel-thumb.png"></dd>
+    <div style="clear:both"></div>
+  </a>
+  </div>
+
+  <div class="item">
+    <dt><a href="hsl.html">HSL conversion</a></dt>
+    <dd><img src="images/hsl-thumb.png"></dd>
+    <div style="clear:both"></div>
+  </div>
+
+  <div class="item">
+    <dt><a href="hsv.html">HSV conversion</a></dt>
+    <dd><img src="images/hsv-thumb.png"></dd>
+    <div style="clear:both"></div>
+  </div>
+</dl>
+
+<div class="footer">&#x25a0; <a href="https://github.com/shashi/colorpool">
+colorpool</a> by <a href="https://github.com/shashi">shashi</a>. MIT License</div>
+</body>
+
+</html>
